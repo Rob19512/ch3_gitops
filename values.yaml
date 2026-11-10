@@ -1,10 +1,12 @@
 # Default values for CDB app.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-# We have only done front for now
 name: cdb
 
 api:
+  enabled: true
+  image:
+    repository: registry.gitlab.com/takima-school/images/cdb/api
+    tag: latest
+  replicaCount: 1
   ingress:
     tlsEnabled: true
     host: api.robin-fraitot.takihq.takima.school
@@ -18,3 +20,16 @@ front:
   ingress:
     tlsEnabled: true
     host: www.robin-fraitot.takihq.takima.school
+
+database:
+  enabled: true
+  image:
+    repository: registry.takima.io/school/proxy/postgres
+    tag: latest
+  replicaCount: 1
+  name: cdb-db
+  username: cdb
+  password: cdbpass
+  pgdata: /var/lib/postgresql/data/pgdata
+  storage: 3Gi
+  storageClassName: gp3

@@ -1,0 +1,14 @@
+{{- if .Values.database.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-pg-db
+spec:
+  storageClassName: {{ .Values.database.storageClassName }}
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: {{ .Values.database.storage }}
+{{- end }}

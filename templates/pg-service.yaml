@@ -1,0 +1,15 @@
+{{- if .Values.database.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-pg
+  labels:
+    app: pg
+spec:
+  selector:
+    app: pg
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+{{- end }}

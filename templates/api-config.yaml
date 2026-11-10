@@ -1,0 +1,9 @@
+{{- if .Values.api.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-api-config
+data:
+  DB_ENDPOINT: {{ printf "%s-pg:5432" .Values.name | quote }}
+  POSTGRES_DB: {{ .Values.database.name | quote }}
+{{- end }}
