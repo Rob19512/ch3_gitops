@@ -6,8 +6,8 @@ name: cdb
 
 api:
   ingress:
-    tlsEnabled: false
-    host: api.to-replace.takima.school
+    tlsEnabled: true
+    host: api.robin-fraitot.takihq.takima.school
 
 front:
   enabled: true
@@ -16,5 +16,5 @@ front:
     tag: latest
   replicaCount: 1
   ingress:
-    tlsEnabled: false
-    host: www.to-replace.takima.school
+    tlsEnabled: true
+    host: www.robin-fraitot.takihq.takima.school
