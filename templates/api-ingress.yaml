@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.name }}-api
+  name: {{ include "cdb.apiName" . }}
 spec:
   ingressClassName: nginx
   rules:
@@ -13,7 +13,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Values.name }}-api
+            name: {{ include "cdb.apiName" . }}
             port:
               number: 80
   {{- if .Values.api.ingress.tlsEnabled }}

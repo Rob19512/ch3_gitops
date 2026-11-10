@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.name }}-pg
+  name: {{ include "cdb.pgName" . }}
   labels:
     app: pg
 spec:

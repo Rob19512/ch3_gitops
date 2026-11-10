@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-api
+  name: {{ include "cdb.apiName" . }}
   labels:
     app: api
 spec:
@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: api
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/api-config.yaml") . | sha256sum }}
     spec:
       imagePullSecrets:
         - name: takima-school-registry
@@ -32,22 +34,22 @@ spec:
             - name: DB_ENDPOINT
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.name }}-api-config
+                  name: {{ include "cdb.apiConfigName" . }}
                   key: DB_ENDPOINT
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.name }}-pg-config
+                  name: {{ include "cdb.pgConfigName" . }}
                   key: POSTGRES_DB
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.name }}-pg-credentials
+                  name: {{ include "cdb.pgCredentialsName" . }}
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.name }}-pg-credentials
+                  name: {{ include "cdb.pgCredentialsName" . }}
                   key: password
           resources:
             requests:

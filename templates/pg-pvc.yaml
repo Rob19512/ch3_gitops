@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Values.name }}-pg-db
+  name: {{ include "cdb.pgPvcName" . }}
 spec:
   storageClassName: {{ .Values.database.storageClassName }}
   accessModes:

@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.name }}-pg-config
+  name: {{ include "cdb.pgConfigName" . }}
 data:
   POSTGRES_DB: {{ .Values.database.name | quote }}
   db_path: {{ .Values.database.pgdata | quote }}

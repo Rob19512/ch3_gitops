@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-pg
+  name: {{ include "cdb.pgName" . }}
   labels:
     app: pg
 spec:
@@ -26,22 +26,22 @@ spec:
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.name }}-pg-config
+                  name: {{ include "cdb.pgConfigName" . }}
                   key: POSTGRES_DB
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.name }}-pg-credentials
+                  name: {{ include "cdb.pgCredentialsName" . }}
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.name }}-pg-credentials
+                  name: {{ include "cdb.pgCredentialsName" . }}
                   key: password
             - name: PGDATA
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.name }}-pg-config
+                  name: {{ include "cdb.pgConfigName" . }}
                   key: db_path
           resources:
             requests:
@@ -56,5 +56,5 @@ spec:
       volumes:
         - name: pg-data
           persistentVolumeClaim:
-            claimName: {{ .Values.name }}-pg-db
+            claimName: {{ include "cdb.pgPvcName" . }}
 {{- end }}

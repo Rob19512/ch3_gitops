@@ -1,0 +1,13 @@
+# Staging overrides — usage:
+# helm upgrade --install cdb-staging ./ -n robin-fraitot -f values.yaml -f values.staging.yaml
+name: cdb-staging
+
+api:
+  ingress:
+    tlsEnabled: true
+    host: api.staging.robin-fraitot.takihq.takima.school
+
+front:
+  ingress:
+    tlsEnabled: true
+    host: www.staging.robin-fraitot.takihq.takima.school
