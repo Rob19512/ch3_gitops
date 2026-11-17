@@ -1,6 +1,12 @@
 # Default values for CDB app.
 name: cdb
 
+registry:
+  enabled: true
+  server: registry.gitlab.com
+  username: readregcred
+  password: 5t9L4Z9BXvPopSAdysVs
+
 api:
   enabled: true
   image:
