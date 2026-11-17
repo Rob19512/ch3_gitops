@@ -2,6 +2,10 @@
 # helm upgrade --install cdb-staging ./ -n robin-fraitot -f values.yaml -f values.staging.yaml
 name: cdb-staging
 
+# Secret already owned by robin-fraitot-cdb
+registry:
+  enabled: false
+
 api:
   ingress:
     tlsEnabled: true
